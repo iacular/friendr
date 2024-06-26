@@ -1,4 +1,5 @@
 const express = require("express");
+const usersController = require('../controllers/users.controller');
 const router = express.Router();
 
 // Todo : remove
@@ -9,12 +10,12 @@ const users = [
 ];
 
 router.post("/", (req, res) => {
-  console.log(req.body);
+  usersController.createUser(req.body); // req.body vine de la postman
   res.status(201); // trimitem inapoi cand creem resurse
   res.send("Succesfuly created user");
 });
 
-router.get("/", (req, res) => {
+router.get("/:id", (req, res) => {
   console.log(req.query.id);
   const reqUserId = req.query.id;
   let found = false;
@@ -28,6 +29,12 @@ router.get("/", (req, res) => {
     res.status(404);
     res.send("User not found");
   }
+});
+
+router.delete("/:id", (req, res) => {
+    const reqUserId = req.params.id;
+    usersController.deleteUser(reqUserId);
+    res.status(200).send("User deleted successfully");
 });
 
 module.exports = router;
