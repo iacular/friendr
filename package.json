@@ -1,0 +1,22 @@
+{
+  "name": "friendr",
+  "version": "1.0.0",
+  "description": "hey",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iacular/friendr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iacular/friendr/issues"
+  },
+  "homepage": "https://github.com/iacular/friendr#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
