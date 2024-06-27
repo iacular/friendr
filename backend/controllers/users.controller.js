@@ -3,8 +3,10 @@ const usersService = require('../services/users.service');
 const usersController = {
     getUser: async (req, res) => {
         console.log("Reached GET user controller");
-        console.log(req.query.id);
-        res.status(201).send("Reached GET user controller");
+        const userId = req.params.id;
+        console.log(userId);
+        const userObj = await usersService.getUserById(userId);
+        res.status(201).send(userObj);
         //usersService.getUser(userObj);
     },
     createUser: async (req, res)  => {
