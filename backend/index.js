@@ -5,7 +5,6 @@ const postsRouter = require('./routers/posts.router')
 const app = express()
 const port = 3000
 
-//TODO: remove
 const mongoose = require('mongoose');
 
 app.use(express.json());
@@ -26,5 +25,5 @@ app.listen(port, () => {
       const kitty = new Cat({ name: 'Zildjian' });
       kitty.save().then(() => console.log('meow'));
     })
-    .catch((err) => console.error(err)); // daca nu se conecteaza la db, afiseaza eroarea
+    .catch((err) => console.error(err));
 });

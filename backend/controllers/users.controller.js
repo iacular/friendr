@@ -1,3 +1,4 @@
+const UserModel = require("../data/users.model");
 const usersService = require('../services/users.service');
 
 const usersController = {
@@ -7,7 +8,6 @@ const usersController = {
         console.log(userId);
         const userObj = await usersService.getUserById(userId);
         res.status(201).send(userObj);
-        //usersService.getUser(userObj);
     },
     createUser: async (req, res)  => {
         console.log("Reached user controller");
@@ -28,8 +28,16 @@ const usersController = {
         res.status(201).send("User created successfully");
     },
     deleteUser: async (req, res) => {
-        console.log(`Delete user with id: ${userID}`);
-        usersService.deleteUser(userID);
+        const userId = req.params.id;
+        await usersService.deleteUser(userId);
+        console.log(`Deleted user with id: ${userId}`);
+        res.status(201).send('Deleted user successfully');
+    },
+    updateUser: async (req, res) => {
+        const userId = req.params.id;
+        await usersService.updateUser(userId);
+        console.log(`Updated user with id: ${userId}`);
+        res.status(201).send('Deleted user successfully');
     }
 }
 module.exports = usersController;
