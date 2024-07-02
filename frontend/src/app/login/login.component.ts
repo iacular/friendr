@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,23 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private appService: AppService) {
     const username = localStorage.getItem('username');
     if(username) {
       this.username = username;
     }
   }
   signIn() {
-    console.log(this.username);
-    localStorage.setItem('username', this.username);
-    this.router.navigate(['/homepage']);
+    this.appService.getUserByUsername(this.username).subscribe({
+      next: (response) => {
+        localStorage.setItem('firstname', this.username);
+        localStorage.setItem('lastname', this.username);
+        localStorage.setItem('username', this.username);
+        this.router.navigate(['/homepage']);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 }

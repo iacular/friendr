@@ -1,6 +1,7 @@
 const express = require('express')
 const usersRouter = require('./routers/users.router')
 const postsRouter = require('./routers/posts.router')
+const cors = require('cors');
 
 const app = express()
 const port = 3000
@@ -8,6 +9,7 @@ const port = 3000
 const mongoose = require('mongoose');
 
 app.use(express.json());
+app.use(cors());
 
 // Routers
 app.use('/users', usersRouter);

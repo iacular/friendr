@@ -4,10 +4,14 @@ const usersService = require('../services/users.service');
 const usersController = {
     getUser: async (req, res) => {
         console.log("Reached GET user controller");
-        const userId = req.params.id;
-        console.log(userId);
-        const userObj = await usersService.getUserById(userId);
-        res.status(201).send(userObj);
+        const username = req.params.username;
+        console.log(username);
+        const userObj = await usersService.getUserByUsername(username);
+        if(!userObj) {
+            res.status(404).send("User not found");
+            return;
+        }
+        res.status(200).send(userObj);
     },
     createUser: async (req, res)  => {
         console.log("Reached user controller");
@@ -17,8 +21,8 @@ const usersController = {
         // validate user object from request
         if (!userToBeCreated ||
             !userToBeCreated.id ||
-            !userToBeCreated.firstName ||
-            !userToBeCreated.lastName ||
+            !userToBeCreated.firstname ||
+            !userToBeCreated.lastname ||
             !userToBeCreated.username
         ) {
             res.status(400).send("Invalid user object");

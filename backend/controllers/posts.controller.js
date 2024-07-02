@@ -21,13 +21,12 @@ const postsController = {
 
         // validate post object from request
         if (!postToBeCreated ||
-            !postToBeCreated.id ||
+            !postToBeCreated.author ||
             !postToBeCreated.title ||
             !postToBeCreated.description) {
             res.status(400).send("Invalid post object");
             return;
         }
-        postToBeCreated.date = new Date().toISOString();
         postsService.createPost(postToBeCreated);
         res.status(201).send("Post created successfully");
     },
