@@ -24,6 +24,12 @@ const postsService = {
         console.log(`Deleted post ${postId} in service`);
         const response = await PostModel.deleteOne({id: postId});
         return response;
+    },
+    removePostLikes: async (postId, username) => {
+        await PostModel.updateOne({id: postId}, { $pull: { likes: username } });
+    },
+    addPostLikes: async (postId, username) => {
+        await PostModel.updateOne({id: postId}, { $push: { likes: username } });
     }
 }
 module.exports = postsService;
